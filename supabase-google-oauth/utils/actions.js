@@ -22,10 +22,11 @@ const signInWith = provider => async () => {
 }
 
 const signinWithGoogle = signInWith('google')
+const signinWithGitHub = signInWith('github')
 
 const signOut = async () => {
   const supabase = await createClientForServer()
   await supabase.auth.signOut()
 }
 
-export { signinWithGoogle, signOut }
+export { signinWithGoogle, signOut, signinWithGitHub }
