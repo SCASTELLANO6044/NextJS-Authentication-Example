@@ -10,7 +10,8 @@ export default function Home() {
 
   useEffect(() => {
     if (session) {
-      router.push("/profile");
+      const name = session.user?.name || "User";``
+      router.push("/profile/" + encodeURIComponent(name));
     }
   }, [session, router]);
 
