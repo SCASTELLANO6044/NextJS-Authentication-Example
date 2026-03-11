@@ -14,19 +14,69 @@ const signInWith = provider => async () => {
       redirectTo: auth_callback_url,
     },
   })
-  console.log(data)
+
+
   if (error) {
     console.log(error)
   }
+
   redirect(data.url)
 }
 
 const signinWithGoogle = signInWith('google')
-const signinWithGitHub = signInWith('github')
+const signinWithGithub = signInWith('github')
 
 const signOut = async () => {
   const supabase = await createClientForServer()
   await supabase.auth.signOut()
 }
 
-export { signinWithGoogle, signOut, signinWithGitHub }
+const signupWithEmailPassword = async (prev, formData) => {
+  const supabase = await createClientForServer()
+
+  const { data, error } = await supabase.auth.signUp({
+    email: formData.get('email'),
+    password: formData.get('password'),
+  })
+
+
+  if (error) {
+    console.log('error', error)
+    return {
+      success: null,
+      error: error.message,
+    }
+  }
+
+  return {
+    success: 'Please check your email',
+    error: null,
+  }
+}
+
+const signinWithEmailPassword = async (prev, formData) => {
+  const supabase = await createClientForServer()
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: formData.get('email'),
+    password: formData.get('password'),
+  })
+
+  if (error) {
+    console.log('error', error)
+    return {
+      success: null,
+      error: error.message,
+    }
+  }
+
+  redirect('/')
+}
+
+export {
+  signinWithGoogle,
+  signOut,
+  signupWithEmailPassword,
+  signinWithGithub,
+  signinWithEmailPassword,
+}
