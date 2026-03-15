@@ -12,8 +12,8 @@ export const middleware = async request => {
     })
 
     const supabase = createServerClient(
-        "https://iatmyzpgrxxyijzgnvhe.supabase.co",
-        "sb_publishable_kdlmGPHrYk-jEdxQ24TZXQ_awesxb5Q",
+        process.env.NEXT_PUBLIC_SUPABASE_URL,
+        process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY,
         {
             cookies: {
                 getAll() {
