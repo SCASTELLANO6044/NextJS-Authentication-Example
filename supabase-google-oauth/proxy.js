@@ -6,7 +6,7 @@ const protectedRoutes = ['/dashboard', '/admin/settings', '/protected']
 /**
  * @param {import('next/server').NextRequest} request
  * */
-export const middleware = async request => {
+export const proxy = async request => {
     let supabaseResponse = NextResponse.next({
         request,
     })
